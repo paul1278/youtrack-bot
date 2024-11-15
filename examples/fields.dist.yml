@@ -1,0 +1,6 @@
+fields:
+  assignee:
+    $type: SingleUserIssueCustomField
+    name: Assignee
+    value:
+      login: '{{value}}'

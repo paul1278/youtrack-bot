@@ -1,0 +1,6 @@
+tickets:
+  - summary: "Test"
+    description: |
+      This is a small ticket
+    project: 0-1
+    assignee: my-user
