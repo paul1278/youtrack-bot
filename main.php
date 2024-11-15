@@ -59,8 +59,8 @@ function apiCall($path, $body = null) {
     curl_close($ch);
     $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     $cerror = curl_error($ch);
-    if($cerror != null) {
-        throw new Exception("Failed to send call: " . $cerror);
+    if($cerror != null OR $code != 200) {
+        throw new Exception("Failed to send call: " . $cerror . "\n\n". $result);
     }
     return json_decode($result, true);
 }
