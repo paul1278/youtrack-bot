@@ -4,3 +4,8 @@ fields:
     name: Assignee
     value:
       login: '{{value}}'
+  priority:
+    name: "Priority"
+    $type: SingleEnumIssueCustomField
+    value:
+      name: '{{value}}'
