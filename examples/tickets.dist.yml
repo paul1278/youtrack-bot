@@ -4,3 +4,12 @@ tickets:
       This is a small ticket
     project: 0-1
     assignee: my-user
+    duedate: "{{eom}}"
+
+
+dates:
+  eom:
+    script:
+      - "last day of this month"
+    format: "U"
+    milliseconds: true
