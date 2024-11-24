@@ -2,7 +2,9 @@
 require(__DIR__ . '/config.php');
 $override = getenv("TICKET_FILE");
 $config = yaml_parse_file($override == null ? TICKET_FILE : $override);
-$fields = yaml_parse_file(__DIR__ . "/fields.yml")["fields"];
+$fieldConfig = yaml_parse_file(__DIR__ . "/fields.yml");
+$fields = $fieldConfig["fields"];
+
 
 foreach($config["tickets"] as $ticket) {
     echo "Creating Ticket: " . $ticket["summary"] . "\n";
