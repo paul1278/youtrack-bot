@@ -9,3 +9,7 @@ fields:
     $type: SingleEnumIssueCustomField
     value:
       name: '{{value}}'
+  duedate:
+    $type: DateIssueCustomField
+    name: "Due Date"
+    value: '{{value}}'
