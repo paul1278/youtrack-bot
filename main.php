@@ -1,8 +1,26 @@
 <?php
 require(__DIR__ . '/config.php');
 $override = getenv("TICKET_FILE");
-$config = yaml_parse_file($override == null ? TICKET_FILE : $override);
+$ticketFile = $override == null ? TICKET_FILE : $override;
+if(!file_exists($ticketFile)) {
+    echo "Ticket file not found: " . $ticketFile . "\n";
+    exit(1);
+}
+if (!file_exists(__DIR__ . "/fields.yml")) {
+    echo "Fields file not found\n";
+    exit(1);
+}
+ini_set("yaml.decode_php", "0");
+$config = yaml_parse_file($ticketFile);
 $fieldConfig = yaml_parse_file(__DIR__ . "/fields.yml");
+if(!isset($config["tickets"])) {
+    echo "Cannot read tickets-file\n";
+    exit(1);
+}
+if(!isset($fieldConfig["fields"])) {
+    echo "Cannot read fields-file\n";
+    exit(1);
+}
 $fields = $fieldConfig["fields"];
 
 
