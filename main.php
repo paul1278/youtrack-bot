@@ -26,6 +26,24 @@ foreach($config["tickets"] as $ticket) {
             echo "Field not found: " . $k . "\n";
             continue;
         }
+        if(preg_match('/^{{[a-z]+}}$/i', $v)) {
+            $replaceName = substr($v, 2, -2);
+            if(!isset($config["dates"][$replaceName])) {
+                echo "Date not found: " . $replaceName . "\n";
+                continue;
+            }
+            $replacer = $config["dates"][$replaceName];
+            $dateScript = $replacer["script"];
+            $d = new DateTime();
+            foreach($dateScript as $s) {
+                $d->modify($s);
+            }
+            $f = $d->format($replacer["format"]);
+            if($replacer["milliseconds"] ?? false) {
+                $f = intval($f) * 1000;
+            }
+            $v = $f;
+        }
         $v = deepReplace($field, "{{value}}", $v);
         $data["customFields"][] = $v;
     }
